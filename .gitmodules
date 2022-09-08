@@ -1,0 +1,6 @@
+[submodule "vasko-da-gama"]
+	path = vasko-da-gama
+	url = git@github.com:mathiazom/vasko-da-gama.git
+[submodule "tagordo"]
+	path = tagordo
+	url = git@github.com:mathiazom/tagordo.git
