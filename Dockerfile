@@ -1,22 +1,18 @@
-FROM python:3.8-alpine
+FROM python:3.10
 
-# Need curl for healthchecks ping
-RUN apk add --no-cache curl
+RUN apt-get update && apt-get install -y cron
 
-COPY vasko-da-gama/requirements.txt vasko-da-gama/requirements.txt
+WORKDIR /app
 
-RUN python -m venv /opt/vasko && /opt/vasko/bin/pip install --no-cache-dir -r vasko-da-gama/requirements.txt
+RUN pip install "poetry==1.2.0"
 
-#COPY tagordo/requirements.txt vasko-da-gama/tagordo/requirements.txt
+COPY vasko-da-gama/pyproject.toml vasko-da-gama/poetry.lock ./
 
-#RUN pip install --no-cache-dir -r vasko-da-gama/tagordo/requirements.txt
+RUN poetry config virtualenvs.create false
 
-COPY vasko-da-gama vasko-da-gama
+RUN poetry install
 
-WORKDIR vasko-da-gama
-
-#COPY tagordo tagordo
-#RUN mkdir checkpoints
+COPY vasko-da-gama .
 
 COPY ./runner.sh /
 
