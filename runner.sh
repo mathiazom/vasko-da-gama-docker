@@ -15,4 +15,4 @@ crontab -l >> /var/log/vasko.log
 
 echo 'Starting cron' >> /var/log/vasko.log
 # Start cron daemon in foreground
-cron && tail -f /var/log/vasko.log
+cron
