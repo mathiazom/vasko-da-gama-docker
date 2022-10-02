@@ -14,5 +14,5 @@ crontab vasko-cron
 crontab -l >> /var/log/vasko.log
 
 echo 'Starting cron' >> /var/log/vasko.log
-# Start cron daemon in foreground
-cron
+# Start cron daemon and keep container running
+cron && tail -f /dev/null
